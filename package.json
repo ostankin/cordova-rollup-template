@@ -1,0 +1,35 @@
+{
+  "name": "cordova-template",
+  "version": "1.0.0",
+  "description": "Description",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rimraf www/*",
+    "jade:release": "jade --no-debug src/jade --out www",
+    "jade": "jade --pretty --watch src/jade --out www",
+    "sass:release": "node-sass --output-style compressed src/scss -ro www/css",
+    "sass": "node-sass --source-map true --source-map-contents src/scss -ro www/css",
+    "js:release": "rollup -c",
+    "js": "rollup -c -w --environment DEBUG",
+    "assets:release": "cpx src/img/** www/img",
+    "assets": "cpx src/img/** www/img -w",
+    "cordova:release": "cordova run browser",
+    "cordova": "cordova run browser -- --live-reload",
+    "build": "npm run clean && npm run jade:release && npm run sass:release && npm run js:release && npm run assets:release",
+    "start": "parallelshell \"npm run jade\" \"npm run sass && npm run sass -- -w\" \"npm run js\" \"npm run assets:release\" \"npm run cordova\""
+  },
+  "private": true,
+  "author": "Vlad Nikiforov",
+  "license": "MIT",
+  "devDependencies": {
+    "browserify": "~4.1.8",
+    "cpx": "^1.5.0",
+    "jade": "^1.11.0",
+    "node-sass": "^4.5.3",
+    "parallelshell": "^3.0.2",
+    "rimraf": "^2.6.2",
+    "rollup": "^0.51.7",
+    "rollup-plugin-uglify": "^2.0.1",
+    "rollup-watch": "^4.3.1"
+  }
+}
